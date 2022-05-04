@@ -15,18 +15,41 @@ public class Restaurant {
         this.location = location;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
+        this.menu.add(new Item("Cold Coffee",73));
+        this.menu.add(new Item("Filter Coffee",100));
+    }
+
+    public LocalTime getClosingTime() {
+        return closingTime;
+    }
+
+    public LocalTime getOpeningTime() {
+        return openingTime;
+    }
+
+    public void setOpeningTime (LocalTime openingTime){
+        this.openingTime = openingTime;
+    }
+
+    public void setClosingTime (LocalTime closingTime){
+        this.closingTime = closingTime;
     }
 
     public boolean isRestaurantOpen() {
-        return true;
-        //DELETE ABOVE STATEMENT AND WRITE CODE HERE
+        LocalTime time = LocalTime.now();
+        int isStillOpen = time.compareTo(closingTime);
+        int isOpen = time.compareTo(openingTime);
+        if (isStillOpen<0&&isOpen>=0) {
+            return true;
+        }
+        return false;
     }
 
     public LocalTime getCurrentTime(){ return  LocalTime.now(); }
 
     public List<Item> getMenu() {
-        return null;
-        //DELETE ABOVE RETURN STATEMENT AND WRITE CODE HERE
+        return this.menu;
+
     }
 
     private Item findItemByName(String itemName){
